@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#studentForm").submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize(); 
+                $.ajax({
+                    type: "POST",
+                    url: "insert_std.php",
+                    data: formData,
+                    success: function (response) {
+                        if (response === "success") {
+                            alert("Insert New Record Successfully!");
+                            window.location.href = "student.php";
+                        } else {
+                            alert("Error: " + response);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <form id="studentForm">
+        id: <input type= "text" id="id" name="id" required></br>
+        name:<input type="text" id="en_name" name="en_name" required></br>
+        surname:<input type="text" id="en_surname" name="en_surname" required></br>
+        ชื่อ:<input type="text" id="th_name" name="th_name" required></br>
+        นามสกุล:<input type="text" id="th_surname" name="th_surname" required></br>
+        Major:<input type="text" id="major_code" name="major_code"></br>
+        Email:<input type="email" id="email" name="email"></br>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </form>
+</body>
+</html>
